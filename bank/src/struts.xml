@@ -1,0 +1,102 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="GBK"/>
+	<constant name="struts.custom.i18n.resources" value="globalMessages"/>
+	<package name="default" extends="struts-default">
+	<interceptors>
+		<interceptor name="SessionInterceptor" class="bank.action.interceptor.SessionInterceptor"/>
+	</interceptors>	
+	<global-results>
+		<result name="loginPage">/login.jsp</result>
+		<result name="abilityError">/abilityError.jsp</result>
+		<result name="Error">/Error.jsp</result>
+	</global-results>
+		<action name="loginValidate" class="bank.action.validateAction.LoginValidate">
+			<result name="input">/login.jsp</result>
+			<result type="chain">login</result>
+		</action>
+		<action name="login" class="bank.action.LoginAction" method="login">
+			<result name="loginSuccess">/trade.jsp</result>
+			<result name="loginError">/loginError.jsp</result>
+		</action>
+		<action name="regValidate" class="bank.action.validateAction.RegistValidate">
+			<result name="input">/regist.jsp</result>
+			<result type="chain">regist</result>
+		</action>
+		<action name="regist" class="bank.action.UserAction" method="regist">
+			<result name="invalid.token">/wrong.jsp</result>
+			<result name="registSuccess">/registSuccess.jsp</result>
+			<interceptor-ref name="defaultStack"/>
+			<interceptor-ref name="tokenSession"/>
+		</action>
+		<action name="smoneyValidate" class="bank.action.validateAction.MoneyValidate">
+			<result name="input">/save.jsp</result>
+			<result type="chain">saveMoney</result>
+		</action>
+		<action name="saveMoney" class="bank.action.TradeAction" method="saveMoney">
+			<result name="invalid.token">/wrong.jsp</result>
+			<result name="saveSuccess" type="chain">selectBalance</result>
+			<interceptor-ref name="defaultStack"/>
+			<interceptor-ref name="tokenSession"/>
+			<interceptor-ref name="SessionInterceptor"/>
+		</action>
+		<action name="fmoneyValidate" class="bank.action.validateAction.MoneyValidate">
+			<result name="input">/fetch.jsp</result>
+			<result type="chain">fetchMoney</result>
+		</action>
+		<action name="fetchMoney" class="bank.action.TradeAction" method="fetchMoney">
+			<result name="invalid.token">/wrong.jsp</result>
+			<result name="fetchSuccess" type="chain">selectBalance</result>
+			<result name="fetchError">/fechError.jsp</result>
+			<interceptor-ref name="defaultStack"/>
+			<interceptor-ref name="tokenSession"/>
+			<interceptor-ref name="SessionInterceptor"/>
+		</action>
+		
+		<action name="tmoneyValidate" class="bank.action.validateAction.TransferValidate">
+			<result name="input">/transfer.jsp</result>
+			<result type="chain">transferMoney</result>
+		</action>
+		<action name="transferMoney" class="bank.action.TradeAction" method="transferMoney">
+			<result name="invalid.token">/wrong.jsp</result>
+			<result name="transferSuccess" type="chain">selectBalance</result>
+			<result name="transfer_money_Error">/transfer_money_Error.jsp</result>
+			<result name="transfer_account_Error">/transfer_account_Error.jsp</result>
+			<interceptor-ref name="defaultStack"/>
+			<interceptor-ref name="tokenSession"/>
+			<interceptor-ref name="SessionInterceptor"/>
+		</action>
+		
+		<action name="selectBalance" class="bank.action.TradeAction" method="selectBalance">
+			<result name="selectBalance">/tradeSuccess.jsp</result>
+			<interceptor-ref name="defaultStack"/>
+			<interceptor-ref name="SessionInterceptor"/>
+		</action>
+		<action name="selectTradeInfo" class="bank.action.TradeAction" method="tradeInfo">
+			<result name="selectTradeInfo">/tradeInfo.jsp</result>
+		</action>
+		<action name="selectUser" class="bank.action.UserAction" method="selectUser">
+			<result name="selectUser">/userInfo.jsp</result>
+			<interceptor-ref name="defaultStack"/>
+			<interceptor-ref name="SessionInterceptor"/>
+		</action>
+		<action name="updateUserValidate" class="bank.action.validateAction.UpdateUserValidate">
+			<result name="input">/updateUser.jsp</result>
+			<result type="chain">updateUser</result>
+		</action>
+		<action name="updateUser" class="bank.action.UserAction" method="updateUser">
+			<result name="updateSuccess" >/updateUserSuccess.jsp</result>
+			<interceptor-ref name="defaultStack"/>
+			<interceptor-ref name="SessionInterceptor"/>
+		</action>
+		<action name="logout" class="bank.action.LoginAction" method="logout">
+			<result name="logout">/logout.jsp</result>
+		</action>
+		<action name="deleteUserInfo" class="bank.action.UserAction" method="deleteUser">
+			<result name="deleteSuccess">/deleteSuccess.jsp</result>
+			<result name="deleteError">/deleteError.jsp</result>
+		</action>
+	</package>
+</struts>
