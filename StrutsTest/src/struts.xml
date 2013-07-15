@@ -1,0 +1,66 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+    <!-- Configuration for the default package. -->
+    <package name="default" extends="struts-default">
+        <action name="loginAction" class="edu.login.Action.LoginAction">
+            <result name="SUCCESS">/mainFrame/main.jsp</result>
+            <result name="input">/login/index.jsp</result>
+            <result name="ERROR">/login/index.jsp</result>
+        </action>
+        <action name="registerAction" class="edu.login.Action.RegisterAction">
+            <result name="SUCCESS">/login/index.jsp</result>
+            <result name="input">/login/register.jsp</result>
+            <result name="ERROR">/login/register.jsp</result>
+        </action>
+        <action name="upMessAction" class="edu.personManager.Action.UpdateMessAction">
+            <result name="SUCCESS">/personMessage/lookMessage.jsp</result>
+            <result name="input">/personMessage/updateMessage.jsp</result>
+            <result name="ERROR">/personMessage/updateMessage.jsp</result>
+        </action>
+        <action name="upPassAction" class="edu.personManager.Action.UpdatePassAction">
+            <result name="SUCCESS">/personMessage/lookMessage.jsp</result>
+            <result name="input">/personMessage/updatePass.jsp</result>
+        </action>
+        
+        <action name="addFriAction" class="edu.friendManager.Action.AddFriAction">
+            <result name="SUCCESS">/friendManager/lookFriends.jsp</result>
+            <result name="input">/friendManager/addFriend.jsp</result>
+        </action>
+        <action name="findFriAction" class="edu.friendManager.Action.FindFriAction">
+            <result name="SUCCESS">/friendManager/findFriend.jsp</result>
+            <result name="ERROR">/friendManager/lookFriends.jsp</result>
+            <result name="input">/friendManager/lookFriends.jsp</result>
+        </action>
+        <action name="upFriAction" class="edu.friendManager.Action.UpdateFriAction">
+            <result name="SUCCESS">/friendManager/lookFriends.jsp</result>
+            <result name="input">/friendManager/updateFriend.jsp</result>
+        </action>
+        <action name="deleteFriAction" class="edu.friendManager.Action.DeleteFriAction">
+            <result name="SUCCESS">/friendManager/lookFriends.jsp</result>
+          
+        </action>
+        <action name="addDayAction" class="edu.dateTimeManager.Action.AddDayAction">
+            <result name="SUCCESS">/dateTimeManager/lookDay.jsp</result>
+            <result name="input">/dateTimeManager/addDay.jsp</result>
+            <result name="ERROR">/dateTimeManager/addDay.jsp</result>
+        </action>
+        <action name="findDayAction" class="edu.dateTimeManager.Action.FindDayAction">
+            <result name="SUCCESS">/dateTimeManager/findDay.jsp</result>
+            <result name="input">/dateTimeManager/lookDay.jsp</result>
+            <result name="ERROR">/dateTimeManager/lookDay.jsp</result>
+        </action>
+        <action name="upDayAction" class="edu.dateTimeManager.Action.UpdateDayAction">
+            <result name="SUCCESS">/dateTimeManager/lookDay.jsp</result>
+            <result name="input">/dateTimeManager/updateDay.jsp</result>
+            <result name="ERROR">/dateTimeManager/updateDay.jsp</result>
+        </action>
+        <action name="deleteDayAction" class="edu.dateTimeManager.Action.DeleteDayAction">
+            <result name="SUCCESS">/dateTimeManager/lookDay.jsp</result>
+        </action>
+        
+    </package>
+</struts>
